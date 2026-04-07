@@ -18,6 +18,7 @@
 
 from typing import Any
 import proto
+from proto.marshal.collections.repeated import RepeatedComposite, Repeated
 import logging
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.v23.services.services.google_ads_service import (
@@ -139,6 +140,10 @@ def create_field_mask(pb_object):
 def format_output_value(value: Any) -> Any:
     if isinstance(value, proto.Enum):
         return value.name
+    elif isinstance(value, RepeatedComposite):
+        return [proto.Message.to_dict(item) for item in value]
+    elif isinstance(value, Repeated):
+        return list(value)
     elif isinstance(value, proto.Message):
         return proto.Message.to_dict(value)
     elif isinstance(value, (list, tuple)):
