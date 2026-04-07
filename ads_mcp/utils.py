@@ -139,6 +139,10 @@ def create_field_mask(pb_object):
 def format_output_value(value: Any) -> Any:
     if isinstance(value, proto.Enum):
         return value.name
+    elif isinstance(value, proto.Message):
+        return proto.Message.to_dict(value)
+    elif isinstance(value, (list, tuple)):
+        return [format_output_value(item) for item in value]
     else:
         return value
 
