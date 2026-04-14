@@ -30,6 +30,7 @@ from ads_mcp.tools import (
     assets,
     asset_links,
     asset_groups,
+    conversion_goals,
 )  # noqa: F401
 from ads_mcp.resources import (
     discovery,
